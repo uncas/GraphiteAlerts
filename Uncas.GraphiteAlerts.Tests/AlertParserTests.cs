@@ -17,7 +17,7 @@ namespace Uncas.GraphiteAlerts.Tests
 
             Assert.That(alert.Target, Is.EqualTo("load"));
             Assert.That(alert.Rules.Count(), Is.EqualTo(1));
-            Assert.That(alert.Rules.First().Level, Is.EqualTo("error"));
+            Assert.That(alert.Rules.First().Level, Is.EqualTo(AlertLevel.Error));
             Assert.That(alert.Rules.First().Operator, Is.EqualTo(">"));
             Assert.That(alert.Rules.First().Value, Is.EqualTo(42));
         }

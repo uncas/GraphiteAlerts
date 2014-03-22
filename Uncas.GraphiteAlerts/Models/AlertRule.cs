@@ -2,8 +2,15 @@
 {
     public class AlertRule
     {
-        public string Operator { get; set; }
-        public double Value { get; set; }
-        public string Level { get; set; }
+        public AlertRule(string @operator, double value, AlertLevel level)
+        {
+            Level = level;
+            Value = value;
+            Operator = @operator;
+        }
+
+        public string Operator { get; private set; }
+        public double Value { get; private set; }
+        public AlertLevel Level { get; private set; }
     }
 }
