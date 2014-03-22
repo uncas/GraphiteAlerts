@@ -15,15 +15,20 @@ namespace Uncas.GraphiteAlerts.Models
 
         public AlertResult Evaluate(Alert alert)
         {
-            IEnumerable<DataPoint> dataPoints = _alertLookup.Lookup(alert.Server,
-                alert.Target);
+            IEnumerable<DataPoint> dataPoints =
+                _alertLookup.Lookup(alert.Server, alert.Target);
             DataPoint newest =
                 dataPoints.OrderByDescending(x => x.Timestamp).FirstOrDefault();
+            if (newest == null)
+                return new AlertResult(AlertLevel.Warn, 0d);
+
             foreach (AlertRule rule in alert.Rules)
+            {
                 if (CheckRule(newest, rule))
                     return new AlertResult(rule.Level, newest.Value);
-            return new AlertResult(AlertLevel.Ok, newest.Value)
-                ;
+            }
+
+            return new AlertResult(AlertLevel.Ok, newest.Value);
         }
 
         private bool CheckRule(DataPoint newest, AlertRule rule)

@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Uncas.GraphiteAlerts.Models.ViewModels.AlertViewModel>
+﻿@using Uncas.GraphiteAlerts.Models.ViewModels
+@model IEnumerable<Uncas.GraphiteAlerts.Models.ViewModels.AlertViewModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Alerts";
 }
 
-<h2>Index</h2>
+<meta http-equiv="refresh" content="10" />
+<h2>Alerts</h2>
 
 <table>
     <tr>
@@ -13,13 +15,16 @@
         <th>Comments</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@item.Name</td>
-        <td>@item.Level</td>
-        <td>@item.Comments</td>
-        <td><a href="@item.ChartUrl">See more details</a></td>
-    </tr>
-}
+    @foreach (AlertViewModel item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Level</td>
+            <td>@item.Comments</td>
+            <td><a href="@item.ChartUrl">See more details</a></td>
+        </tr>
+    }
 
 </table>
+
+<p>Last refreshed @DateTime.Now.ToString("G")</p>

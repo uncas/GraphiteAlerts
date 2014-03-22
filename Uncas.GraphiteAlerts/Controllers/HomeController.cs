@@ -10,28 +10,40 @@ namespace Uncas.GraphiteAlerts.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly AlertEngine _alertEngine = new AlertEngine(new AlertLookup());
+
+        public ActionResult Index(bool fake = false)
         {
-            var alertEngine = new AlertEngine(new AlertLookup());
-            string appdatafolder = Path.Combine(Request.PhysicalApplicationPath,
-                "App_Data");
-            string[] files = Directory.GetFiles(appdatafolder, "*.json");
-            var result = new List<AlertViewModel>
+            IEnumerable<AlertViewModel> alerts = fake ? GetFakeAlerts() : GetAlerts();
+            return View(alerts);
+        }
+
+        private IEnumerable<AlertViewModel> GetAlerts()
+        {
+            if (string.IsNullOrWhiteSpace(Request.PhysicalApplicationPath))
+                yield break;
+
+            var alertParser = new AlertParser();
+            string folder = Path.Combine(Request.PhysicalApplicationPath, "App_Data");
+            foreach (string file in Directory.GetFiles(folder, "*.json"))
+            {
+                string json = System.IO.File.ReadAllText(file);
+                Alert alert = alertParser.Parse(json);
+                AlertResult alertResult = _alertEngine.Evaluate(alert);
+                yield return new AlertViewModel(alert.Name, alertResult.Level,
+                    FormatComments(alert.Rules.First().Value, alertResult.Value),
+                    string.Format("{0}/render?target={1}&width=600&height=400",
+                        alert.Server, alert.Target));
+            }
+        }
+
+        private static IEnumerable<AlertViewModel> GetFakeAlerts()
+        {
+            return new[]
             {
                 new AlertViewModel("Stuff", AlertLevel.Ok, "", "X"),
                 new AlertViewModel("Blib", AlertLevel.Error, FormatComments(3, 10), "X")
             };
-            foreach (string file in files)
-            {
-                string json = System.IO.File.ReadAllText(file);
-                Alert alert = new AlertParser().Parse(json);
-                AlertResult alertResult = alertEngine.Evaluate(alert);
-                result.Add(new AlertViewModel(alert.Name, alertResult.Level,
-                    FormatComments(alert.Rules.First().Value, alertResult.Value),
-                    string.Format("{0}/render?target={1}&width=600&height=400",
-                        alert.Server, alert.Target)));
-            }
-            return View(result);
         }
 
         private static string FormatComments(double limit, double actual)
