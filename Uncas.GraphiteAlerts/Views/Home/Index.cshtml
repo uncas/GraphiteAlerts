@@ -1,14 +1,33 @@
-﻿@using Uncas.GraphiteAlerts.Models.ViewModels
+﻿@using Uncas.GraphiteAlerts.Models
+@using Uncas.GraphiteAlerts.Models.ViewModels
 @model IEnumerable<Uncas.GraphiteAlerts.Models.ViewModels.AlertViewModel>
 
 @{
     ViewBag.Title = "Alerts";
 }
 
+@functions
+{
+
+    private string GetClassName(AlertLevel level)
+    {
+        switch (level)
+        {
+            case AlertLevel.Warning:
+                return "alert-warning";
+            case AlertLevel.Critical:
+                return "alert-danger";
+            default:
+                return string.Empty;
+        }
+    }
+
+}
+
 <meta http-equiv="refresh" content="10" />
 <h2>Alerts</h2>
 
-<table>
+<table class="table-bordered table-condensed">
     <tr>
         <th>Name</th>
         <th>Status</th>
@@ -18,7 +37,7 @@
 
     @foreach (AlertViewModel item in Model)
     {
-        <tr>
+        <tr class="@GetClassName(item.Level)">
             <td>@item.Name</td>
             <td>@item.Level</td>
             <td>@item.Comments</td>
@@ -35,4 +54,6 @@
 
 </table>
 
-<p>Last refreshed @DateTime.Now.ToString("G")</p>
+<footer>
+    <p>Last refreshed @DateTime.Now.ToString("G")</p>
+</footer>
