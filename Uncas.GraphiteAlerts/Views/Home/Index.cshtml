@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Uncas.GraphiteAlerts.Models.AlertViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>Name</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+    </tr>
+}
+
+</table>
