@@ -7,13 +7,12 @@ using Uncas.GraphiteAlerts.Tests.TestData;
 namespace Uncas.GraphiteAlerts.Tests
 {
     [TestFixture]
-    public class AlertParserTests
+    public class AlertParserTests : WithFixture<AlertParser>
     {
         [Test]
         public void Parse()
         {
-            var sut = new AlertParser();
-            Alert alert = sut.Parse(TestDataFile.GetAlert());
+            Alert alert = Sut.Parse(TestDataFile.GetAlert());
 
             Assert.That(alert.Target, Is.EqualTo("load"));
             Assert.That(alert.Rules.Count(), Is.EqualTo(1));

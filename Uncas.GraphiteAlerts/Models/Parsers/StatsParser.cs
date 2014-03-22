@@ -9,6 +9,11 @@ namespace Uncas.GraphiteAlerts.Models.Parsers
         public IEnumerable<DataPoint> Parse(string jsonString)
         {
             var stats = JsonConvert.DeserializeObject<dynamic>(jsonString);
+            return Parse(stats);
+        }
+
+        public IEnumerable<DataPoint> Parse(dynamic stats)
+        {
             dynamic datapoints = stats[0].datapoints;
             foreach (dynamic datapoint in datapoints)
                 yield return ParseDataPoint(datapoint);

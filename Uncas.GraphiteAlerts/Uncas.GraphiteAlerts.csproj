@@ -130,6 +130,7 @@
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertEngine.cs" />
     <Compile Include="Models\AlertLevel.cs" />
+    <Compile Include="Models\AlertLookup.cs" />
     <Compile Include="Models\IAlertLookup.cs" />
     <Compile Include="Models\Parsers\AlertParser.cs" />
     <Compile Include="Models\AlertRule.cs" />

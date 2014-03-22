@@ -15,7 +15,7 @@ namespace Uncas.GraphiteAlerts.Models
 
         public AlertLevel Evaluate(Alert alert)
         {
-            IEnumerable<DataPoint> dataPoints = _alertLookup.Lookup(alert.Target);
+            IEnumerable<DataPoint> dataPoints = _alertLookup.Lookup(alert.Server, alert.Target);
             DataPoint newest =
                 dataPoints.OrderByDescending(x => x.Timestamp).FirstOrDefault();
             foreach (AlertRule rule in alert.Rules)
