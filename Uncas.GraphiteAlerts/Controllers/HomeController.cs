@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -21,11 +22,11 @@ namespace Uncas.GraphiteAlerts.Controllers
 
         private IEnumerable<AlertViewModel> GetAlerts()
         {
-            if (string.IsNullOrWhiteSpace(Request.PhysicalApplicationPath))
+            string folder = GetFolder();
+            if (string.IsNullOrWhiteSpace(folder))
                 yield break;
 
             var alertParser = new AlertParser();
-            string folder = Path.Combine(Request.PhysicalApplicationPath, "App_Data");
             foreach (string file in Directory.GetFiles(folder, "*.json"))
             {
                 string json = System.IO.File.ReadAllText(file);
@@ -42,6 +43,17 @@ namespace Uncas.GraphiteAlerts.Controllers
                         alertResult.Timestamp);
                 }
             }
+        }
+
+        private string GetFolder()
+        {
+            string alertsFolder = ConfigurationManager.AppSettings["AlertsFolder"];
+            if (!string.IsNullOrWhiteSpace(alertsFolder))
+                return alertsFolder;
+            if (string.IsNullOrWhiteSpace(Request.PhysicalApplicationPath))
+                return null;
+
+            return Path.Combine(Request.PhysicalApplicationPath, "App_Data");
         }
 
         private static IEnumerable<AlertViewModel> GetFakeAlerts()

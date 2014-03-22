@@ -26,7 +26,7 @@
                 @if (item.Timestamp.HasValue)
                 {
                     DateTime local = new DateTimeOffset(item.Timestamp.Value).ToLocalTime().DateTime;
-                    @local.ToString("G")
+                    @local.ToString("g")
                 }
             </td>
             <td><a href="@item.ChartUrl">See more details</a></td>
