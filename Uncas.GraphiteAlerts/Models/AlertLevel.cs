@@ -3,7 +3,7 @@
     public enum AlertLevel
     {
         Ok,
-        Warn,
-        Error
+        Warning,
+        Critical
     }
 }

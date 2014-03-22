@@ -133,8 +133,10 @@
     <Compile Include="Models\AlertLevel.cs" />
     <Compile Include="Models\AlertLookup.cs" />
     <Compile Include="Models\IAlertLookup.cs" />
+    <Compile Include="Models\Parsers\AlertJson.cs" />
     <Compile Include="Models\Parsers\AlertParser.cs" />
     <Compile Include="Models\AlertRule.cs" />
+    <Compile Include="Models\Parsers\AlertsJson.cs" />
     <Compile Include="Models\ViewModels\AlertViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\DataPoint.cs" />

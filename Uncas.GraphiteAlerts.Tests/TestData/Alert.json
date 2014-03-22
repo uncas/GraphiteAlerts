@@ -1,12 +1,40 @@
 {
-    "name": "Test",
     "server": "http://localhost:8080",
-    "target": "load",
-    "rules": [
+    "namePrefix": "prod.",
+    "alerts": [
         {
-            "operator": ">",
-            "value": 42,
-            "level": "error"
+            "name": "web.cpu",
+            "target": "web.cpu",
+            "description": "The CPU load in percentage on the production web server.",
+            "rules": [
+                {
+                    "operator": ">",
+                    "value": 42,
+                    "level": "warning"
+                },
+                {
+                    "operator": ">",
+                    "value": 60,
+                    "level": "critical"
+                }
+            ]
+        },
+        {
+            "name": "job.cpu",
+            "target": "job.cpu",
+            "description": "The CPU load in percentage on the production job server.",
+            "rules": [
+                {
+                    "operator": ">",
+                    "value": 42,
+                    "level": "warning"
+                },
+                {
+                    "operator": ">",
+                    "value": 80,
+                    "level": "critical"
+                }
+            ]
         }
     ]
 }

@@ -1,12 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Uncas.GraphiteAlerts.Models.Parsers
 {
     public class AlertParser
     {
-        public Alert Parse(string jsonString)
+        public IEnumerable<Alert> Parse(string jsonString)
         {
-            return JsonConvert.DeserializeObject<Alert>(jsonString);
+            var alerts = JsonConvert.DeserializeObject<AlertsJson>(jsonString);
+            return alerts.Alerts.Select(x =>
+                new Alert(alerts.Server, x.Target, x.Rules,
+                    string.Concat(alerts.NamePrefix, x.Name)));
         }
     }
 }

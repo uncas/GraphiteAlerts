@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using Uncas.GraphiteAlerts.Models;
 using Uncas.GraphiteAlerts.Models.Parsers;
@@ -10,13 +11,17 @@ namespace Uncas.GraphiteAlerts.Tests
     public class AlertParserTests : WithFixture<AlertParser>
     {
         [Test]
-        public void Parse()
+        public void Parse_Valid_Ok()
         {
-            Alert alert = Sut.Parse(TestDataFile.GetAlert());
+            IEnumerable<Alert> alerts = Sut.Parse(TestDataFile.GetAlert());
 
-            Assert.That(alert.Target, Is.EqualTo("load"));
-            Assert.That(alert.Rules.Count(), Is.EqualTo(1));
-            Assert.That(alert.Rules.First().Level, Is.EqualTo(AlertLevel.Error));
+            Assert.That(alerts, Is.Not.Empty);
+            Assert.That(alerts.Count(), Is.EqualTo(2));
+            Alert alert = alerts.First();
+            Assert.That(alert.Target, Is.EqualTo("web.cpu"));
+            Assert.That(alert.Name, Is.EqualTo("prod.web.cpu"));
+            Assert.That(alert.Rules.Count(), Is.EqualTo(2));
+            Assert.That(alert.Rules.First().Level, Is.EqualTo(AlertLevel.Warning));
             Assert.That(alert.Rules.First().Operator, Is.EqualTo(">"));
             Assert.That(alert.Rules.First().Value, Is.EqualTo(42));
         }

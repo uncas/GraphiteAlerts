@@ -29,15 +29,18 @@ namespace Uncas.GraphiteAlerts.Controllers
             foreach (string file in Directory.GetFiles(folder, "*.json"))
             {
                 string json = System.IO.File.ReadAllText(file);
-                Alert alert = alertParser.Parse(json);
-                AlertResult alertResult = _alertEngine.Evaluate(alert);
-                yield return new AlertViewModel(
-                    alert.Name,
-                    alertResult.Level,
-                    FormatComments(alert.Rules.First().Value, alertResult.Value),
-                    string.Format("{0}/render?target={1}&width=600&height=400",
-                        alert.Server, alert.Target),
-                    alertResult.Timestamp);
+                IEnumerable<Alert> alerts = alertParser.Parse(json);
+                foreach (Alert alert in alerts)
+                {
+                    AlertResult alertResult = _alertEngine.Evaluate(alert);
+                    yield return new AlertViewModel(
+                        alert.Name,
+                        alertResult.Level,
+                        FormatComments(alert.Rules.First().Value, alertResult.Value),
+                        string.Format("{0}/render?target={1}&width=600&height=400",
+                            alert.Server, alert.Target),
+                        alertResult.Timestamp);
+                }
             }
         }
 
@@ -46,7 +49,7 @@ namespace Uncas.GraphiteAlerts.Controllers
             return new[]
             {
                 new AlertViewModel("Stuff", AlertLevel.Ok, "", "X", DateTime.Now),
-                new AlertViewModel("Blib", AlertLevel.Error, FormatComments(3, 10), "X",
+                new AlertViewModel("Blib", AlertLevel.Critical, FormatComments(3, 10), "X",
                     DateTime.Now)
             };
         }

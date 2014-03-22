@@ -22,7 +22,7 @@ namespace Uncas.GraphiteAlerts.Models
                     .OrderByDescending(x => x.Timestamp)
                     .FirstOrDefault();
             if (newest == null || !newest.Value.HasValue)
-                return new AlertResult(AlertLevel.Warn, 0d, null);
+                return new AlertResult(AlertLevel.Warning, 0d, null);
 
             double newestValue = newest.Value.Value;
             foreach (AlertRule rule in alert.Rules)

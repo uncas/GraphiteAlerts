@@ -12,13 +12,13 @@ namespace Uncas.GraphiteAlerts.Tests
         [Test]
         [TestCase(41, AlertLevel.Ok)]
         [TestCase(42, AlertLevel.Ok)]
-        [TestCase(43, AlertLevel.Error)]
+        [TestCase(43, AlertLevel.Critical)]
         public void Evaluate(int value, AlertLevel expected)
         {
             Fixture.FreezeResult<IAlertLookup, IEnumerable<DataPoint>>(new[]
             {new DataPoint(value, A<DateTime>())});
             Fixture.Inject(
-                (IEnumerable<AlertRule>) new[] {new AlertRule(">", 42, AlertLevel.Error)});
+                (IEnumerable<AlertRule>) new[] {new AlertRule(">", 42, AlertLevel.Critical)});
 
             AlertResult alertResult = Sut.Evaluate(A<Alert>());
 
