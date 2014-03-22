@@ -9,5 +9,7 @@ Features
 
 Plans
 -----
+- Read alert definitions from configurable folders.
+- Styling.
 - Refresh of all alerts, using ajax refresh.
 - Refresh alerts individually, using ajax refresh.

@@ -22,16 +22,38 @@ namespace Uncas.GraphiteAlerts.Models
                     .OrderByDescending(x => x.Timestamp)
                     .FirstOrDefault();
             if (newest == null || !newest.Value.HasValue)
-                return new AlertResult(AlertLevel.Warning, 0d, null);
+                return new AlertResult(AlertLevel.Warning, 0d, null, "No data.");
 
             double newestValue = newest.Value.Value;
             foreach (AlertRule rule in alert.Rules)
             {
                 if (CheckRule(newestValue, rule))
-                    return new AlertResult(rule.Level, newestValue, newest.Timestamp);
+                    return new AlertResult(rule.Level, newestValue, newest.Timestamp,
+                        GetComment(rule, newestValue));
             }
 
-            return new AlertResult(AlertLevel.Ok, newestValue, newest.Timestamp);
+            return new AlertResult(
+                AlertLevel.Ok, newestValue, newest.Timestamp,
+                string.Format("The actual value '{0}' is OK.", newestValue));
+        }
+
+        private string GetComment(AlertRule rule, double newestValue)
+        {
+            string format = GetFormat(rule);
+            return string.Format(format, rule.Value, newestValue);
+        }
+
+        private static string GetFormat(AlertRule rule)
+        {
+            switch (rule.Operator)
+            {
+                case ">":
+                    return "The actual value '{1}' is larger than the limit at '{0}'.";
+                case "<":
+                    return "The actual value '{1}' is smaller than the limit at '{0}'.";
+            }
+
+            return string.Empty;
         }
 
         private bool CheckRule(double newestValue, AlertRule rule)

@@ -8,11 +8,16 @@ namespace Uncas.GraphiteAlerts.Models
         private readonly DateTime? _timestamp;
         private readonly double _value;
 
-        public AlertResult(AlertLevel level, double value, DateTime? timestamp)
+        public AlertResult(
+            AlertLevel level,
+            double value,
+            DateTime? timestamp,
+            string comment)
         {
             _level = level;
             _value = value;
             _timestamp = timestamp;
+            Comment = comment;
         }
 
         public AlertLevel Level
@@ -29,5 +34,7 @@ namespace Uncas.GraphiteAlerts.Models
         {
             get { return _timestamp; }
         }
+
+        public string Comment { get; private set; }
     }
 }

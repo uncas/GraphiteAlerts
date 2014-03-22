@@ -16,7 +16,7 @@ namespace Uncas.GraphiteAlerts.Controllers
         public ActionResult Index(bool fake = false)
         {
             IEnumerable<AlertViewModel> alerts = fake ? GetFakeAlerts() : GetAlerts();
-            return View(alerts);
+            return View(alerts.OrderByDescending(x => x.Level).ThenBy(x => x.Name));
         }
 
         private IEnumerable<AlertViewModel> GetAlerts()
@@ -36,7 +36,7 @@ namespace Uncas.GraphiteAlerts.Controllers
                     yield return new AlertViewModel(
                         alert.Name,
                         alertResult.Level,
-                        FormatComments(alert.Rules.First().Value, alertResult.Value),
+                        alertResult.Comment,
                         string.Format("{0}/render?target={1}&width=600&height=400",
                             alert.Server, alert.Target),
                         alertResult.Timestamp);
