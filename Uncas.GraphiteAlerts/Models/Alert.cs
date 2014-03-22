@@ -4,8 +4,10 @@ namespace Uncas.GraphiteAlerts.Models
 {
     public class Alert
     {
-        public Alert(string server, string target, IEnumerable<AlertRule> rules)
+        public Alert(string server, string target, IEnumerable<AlertRule> rules,
+            string name)
         {
+            Name = name;
             Rules = rules;
             Target = target;
             Server = server;
@@ -14,5 +16,6 @@ namespace Uncas.GraphiteAlerts.Models
         public string Server { get; private set; }
         public string Target { get; private set; }
         public IEnumerable<AlertRule> Rules { get; private set; }
+        public string Name { get; private set; }
     }
 }

@@ -20,9 +20,9 @@ namespace Uncas.GraphiteAlerts.Tests
             Fixture.Inject(
                 (IEnumerable<AlertRule>) new[] {new AlertRule(">", 42, AlertLevel.Error)});
 
-            AlertLevel alertLevel = Sut.Evaluate(A<Alert>());
+            AlertResult alertResult = Sut.Evaluate(A<Alert>());
 
-            Assert.That(alertLevel, Is.EqualTo(expected));
+            Assert.That(alertResult.Level, Is.EqualTo(expected));
         }
     }
 }

@@ -9,13 +9,16 @@
 <table>
     <tr>
         <th>Name</th>
+        <th>Status</th>
+        <th>Comments</th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @item.Name
-        </td>
+        <td>@item.Name</td>
+        <td>@item.Level</td>
+        <td>@item.Comments</td>
+        <td><a href="@item.ChartUrl">See more details</a></td>
     </tr>
 }
 

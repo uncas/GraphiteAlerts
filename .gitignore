@@ -2,3 +2,4 @@ bin/
 obj/
 
 /packages/
+/Uncas.GraphiteAlerts/App_Data/*.json

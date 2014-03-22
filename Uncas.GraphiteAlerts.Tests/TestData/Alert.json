@@ -1,4 +1,5 @@
 {
+    "name": "Test",
     "server": "http://localhost:8080",
     "target": "load",
     "rules": [

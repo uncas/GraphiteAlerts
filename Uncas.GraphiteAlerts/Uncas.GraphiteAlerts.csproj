@@ -127,6 +127,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\AlertResult.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertEngine.cs" />
     <Compile Include="Models\AlertLevel.cs" />
