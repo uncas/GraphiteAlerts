@@ -18,22 +18,25 @@ namespace Uncas.GraphiteAlerts.Models
             IEnumerable<DataPoint> dataPoints =
                 _alertLookup.Lookup(alert.Server, alert.Target);
             DataPoint newest =
-                dataPoints.OrderByDescending(x => x.Timestamp).FirstOrDefault();
-            if (newest == null)
-                return new AlertResult(AlertLevel.Warn, 0d);
+                dataPoints.Where(y => y.Value.HasValue)
+                    .OrderByDescending(x => x.Timestamp)
+                    .FirstOrDefault();
+            if (newest == null || !newest.Value.HasValue)
+                return new AlertResult(AlertLevel.Warn, 0d, null);
 
+            double newestValue = newest.Value.Value;
             foreach (AlertRule rule in alert.Rules)
             {
-                if (CheckRule(newest, rule))
-                    return new AlertResult(rule.Level, newest.Value);
+                if (CheckRule(newestValue, rule))
+                    return new AlertResult(rule.Level, newestValue, newest.Timestamp);
             }
 
-            return new AlertResult(AlertLevel.Ok, newest.Value);
+            return new AlertResult(AlertLevel.Ok, newestValue, newest.Timestamp);
         }
 
-        private bool CheckRule(DataPoint newest, AlertRule rule)
+        private bool CheckRule(double newestValue, AlertRule rule)
         {
-            return GetRuleOperator(rule)(newest.Value, rule.Value);
+            return GetRuleOperator(rule)(newestValue, rule.Value);
         }
 
         private Func<double, double, bool> GetRuleOperator(AlertRule rule)

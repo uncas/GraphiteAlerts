@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -30,10 +31,13 @@ namespace Uncas.GraphiteAlerts.Controllers
                 string json = System.IO.File.ReadAllText(file);
                 Alert alert = alertParser.Parse(json);
                 AlertResult alertResult = _alertEngine.Evaluate(alert);
-                yield return new AlertViewModel(alert.Name, alertResult.Level,
+                yield return new AlertViewModel(
+                    alert.Name,
+                    alertResult.Level,
                     FormatComments(alert.Rules.First().Value, alertResult.Value),
                     string.Format("{0}/render?target={1}&width=600&height=400",
-                        alert.Server, alert.Target));
+                        alert.Server, alert.Target),
+                    alertResult.Timestamp);
             }
         }
 
@@ -41,8 +45,9 @@ namespace Uncas.GraphiteAlerts.Controllers
         {
             return new[]
             {
-                new AlertViewModel("Stuff", AlertLevel.Ok, "", "X"),
-                new AlertViewModel("Blib", AlertLevel.Error, FormatComments(3, 10), "X")
+                new AlertViewModel("Stuff", AlertLevel.Ok, "", "X", DateTime.Now),
+                new AlertViewModel("Blib", AlertLevel.Error, FormatComments(3, 10), "X",
+                    DateTime.Now)
             };
         }
 

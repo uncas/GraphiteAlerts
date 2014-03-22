@@ -56,7 +56,7 @@
     <Compile Include="AlertLookupTests.cs" />
     <Compile Include="AlertParserTests.cs" />
     <Compile Include="FixtureExtensions.cs" />
-    <Compile Include="ParserTests.cs" />
+    <Compile Include="StatsParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\TestDataFile.cs" />
     <Compile Include="WithFixture.cs" />
@@ -67,6 +67,7 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="TestData\GraphiteStats.json" />
     <EmbeddedResource Include="TestData\Alert.json" />
+    <EmbeddedResource Include="TestData\GraphiteStatsWithNull.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uncas.GraphiteAlerts\Uncas.GraphiteAlerts.csproj">

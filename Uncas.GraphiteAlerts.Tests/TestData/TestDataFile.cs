@@ -5,9 +5,14 @@ namespace Uncas.GraphiteAlerts.Tests.TestData
 {
     internal static class TestDataFile
     {
-        internal static string GetGraphiteStats()
+        public static string GetGraphiteStats()
         {
             return Get("GraphiteStats.json");
+        }
+
+        public static string GetGraphiteStatsWithNull()
+        {
+            return Get("GraphiteStatsWithNull.json");
         }
 
         public static string GetAlert()
