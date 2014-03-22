@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertParserTests.cs" />
     <Compile Include="ParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestData\TestDataFile.cs" />
@@ -49,6 +50,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <EmbeddedResource Include="TestData\GraphiteStats.json" />
+    <EmbeddedResource Include="TestData\Alert.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Uncas.GraphiteAlerts\Uncas.GraphiteAlerts.csproj">

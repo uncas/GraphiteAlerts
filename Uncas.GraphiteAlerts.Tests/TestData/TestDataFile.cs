@@ -10,6 +10,11 @@ namespace Uncas.GraphiteAlerts.Tests.TestData
             return Get("GraphiteStats.json");
         }
 
+        public static string GetAlert()
+        {
+            return Get("Alert.json");
+        }
+
         private static string Get(string file)
         {
             string resourceName =

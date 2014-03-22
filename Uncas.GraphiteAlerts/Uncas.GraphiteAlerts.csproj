@@ -127,10 +127,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Models\AlertViewModel.cs" />
+    <Compile Include="Models\Alert.cs" />
+    <Compile Include="Models\Parsers\AlertParser.cs" />
+    <Compile Include="Models\AlertRule.cs" />
+    <Compile Include="Models\ViewModels\AlertViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\DataPoint.cs" />
-    <Compile Include="Models\Parser.cs" />
+    <Compile Include="Models\Parsers\StatsParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

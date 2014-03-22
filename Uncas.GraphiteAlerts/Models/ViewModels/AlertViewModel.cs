@@ -1,4 +1,4 @@
-﻿namespace Uncas.GraphiteAlerts.Models
+﻿namespace Uncas.GraphiteAlerts.Models.ViewModels
 {
     public class AlertViewModel
     {

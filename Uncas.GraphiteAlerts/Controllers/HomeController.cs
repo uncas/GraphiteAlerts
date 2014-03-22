@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Uncas.GraphiteAlerts.Models;
+using Uncas.GraphiteAlerts.Models.ViewModels;
 
 namespace Uncas.GraphiteAlerts.Controllers
 {

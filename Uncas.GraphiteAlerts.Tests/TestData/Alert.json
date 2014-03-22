@@ -1,0 +1,10 @@
+{
+    "target": "load",
+    "rules": [
+        {
+            "operator": ">",
+            "value": 42,
+            "level": "error"
+        }
+    ]
+}
