@@ -2,7 +2,6 @@
     ViewBag.Title = "Alerts";
 }
 
-<meta http-equiv="refresh" content="100" />
 <h2>Alerts</h2>
 
 <table class="table-bordered table-condensed">
@@ -13,7 +12,7 @@
         <th>Time of last value</th>
     </tr>
     <tbody id="alerts" data-bind="foreach: alerts, visible: alerts().length > 0">
-        <tr class="alert" data-bind="attr: { class: cssClass}">
+        <tr class="alert" data-bind="attr: { class: cssClass }">
             <td class="name" data-bind="text: name"></td>
             <td class="level" data-bind="text: level"></td>
             <td class="comments" data-bind="text: comments"></td>
@@ -24,5 +23,5 @@
 </table>
 
 <footer>
-    <p>Last refreshed @DateTime.Now.ToString("G")</p>
+    <p><span id="lastUpdated"></span></p>
 </footer>

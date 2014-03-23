@@ -8,6 +8,11 @@ window.alertsApp.datacontext = (function () {
 
     return datacontext;
 
+    function updateInfo() {
+        var today = new Date();
+        $("footer p span#lastUpdated").text("Last updated " + today.toLocaleString());
+    }
+
     function getAlerts(alertsObservable, errorObservable) {
         return ajaxRequest("get", alertsUrl())
             .done(getSucceeded)
@@ -16,10 +21,12 @@ window.alertsApp.datacontext = (function () {
         function getSucceeded(data) {
             var mappedAlerts = $.map(data, function(list) { return new createAlert(list); });
             alertsObservable(mappedAlerts);
+            updateInfo();
         }
 
         function getFailed() {
             errorObservable("Error retrieving alerts.");
+            updateInfo();
         }
     }
 

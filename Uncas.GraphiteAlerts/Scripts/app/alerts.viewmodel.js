@@ -3,8 +3,9 @@
     var alerts = ko.observableArray();
     var error = ko.observable();
 
-    var search = function () {
+    var search = function() {
         datacontext.getAlerts(alerts, error);
+        setTimeout(search, 30 * 1000);
     };
 
     search();
