@@ -11,6 +11,7 @@ namespace Uncas.GraphiteAlerts.Models
 {
     public class AlertService
     {
+        private static readonly Random _random = new Random();
         private readonly AlertEngine _alertEngine = new AlertEngine(new AlertLookup());
 
         public IEnumerable<AlertViewModel> GetAlerts(bool fake = false)
@@ -63,7 +64,8 @@ namespace Uncas.GraphiteAlerts.Models
             return new[]
             {
                 new AlertViewModel("Stuff", AlertLevel.Ok, "", "X", DateTime.Now),
-                new AlertViewModel("Blib", AlertLevel.Critical, FormatComments(3, 10), "X",
+                new AlertViewModel("Blib", AlertLevel.Critical,
+                    FormatComments(3, _random.Next(10, 100)), "X",
                     DateTime.Now)
             };
         }

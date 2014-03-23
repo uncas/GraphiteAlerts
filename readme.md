@@ -7,9 +7,10 @@ Features
 --------
 - Basic update using page refresh.
 - Read alert definitions from configurable folders.
+- Styling.
+- Refresh of all alerts, using ajax refresh.
 
 Plans
 -----
-- Styling.
-- Refresh of all alerts, using ajax refresh.
+- Server side caching?
 - Refresh alerts individually, using ajax refresh.

@@ -25,6 +25,8 @@
 <footer>
     <p>
         <span id="lastUpdated"></span>
-        <a class="updateNow" href="#" data-bind="click: function () { search(); }">Update now</a>
+        <span id="updatingStatus" class="alert-danger"></span>
+        <a id="updateNow" href="#" data-bind="click: function () { search(); }">Update now</a>
+        <span id="updateNowShadow">Updating...</span>
     </p>
 </footer>
