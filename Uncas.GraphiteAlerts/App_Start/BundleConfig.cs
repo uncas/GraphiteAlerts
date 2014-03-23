@@ -40,6 +40,12 @@ namespace Uncas.GraphiteAlerts
 
             bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
                 "~/Content/bootstrap.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                "~/Scripts/knockout-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/alerts").IncludeDirectory(
+                "~/Scripts/app/", "alerts.*"));
         }
     }
 }

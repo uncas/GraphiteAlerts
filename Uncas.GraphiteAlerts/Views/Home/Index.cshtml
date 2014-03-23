@@ -1,30 +1,8 @@
-﻿@using Uncas.GraphiteAlerts.Models
-@using Uncas.GraphiteAlerts.Models.ViewModels
-@model IEnumerable<Uncas.GraphiteAlerts.Models.ViewModels.AlertViewModel>
-
-@{
+﻿@{
     ViewBag.Title = "Alerts";
 }
 
-@functions
-{
-
-    private string GetClassName(AlertLevel level)
-    {
-        switch (level)
-        {
-            case AlertLevel.Warning:
-                return "alert-warning";
-            case AlertLevel.Critical:
-                return "alert-danger";
-            default:
-                return string.Empty;
-        }
-    }
-
-}
-
-<meta http-equiv="refresh" content="10" />
+<meta http-equiv="refresh" content="100" />
 <h2>Alerts</h2>
 
 <table class="table-bordered table-condensed">
@@ -34,24 +12,15 @@
         <th>Comments</th>
         <th>Time of last value</th>
     </tr>
-
-    @foreach (AlertViewModel item in Model)
-    {
-        <tr class="@GetClassName(item.Level)">
-            <td>@item.Name</td>
-            <td>@item.Level</td>
-            <td>@item.Comments</td>
-            <td>
-                @if (item.Timestamp.HasValue)
-                {
-                    DateTime local = new DateTimeOffset(item.Timestamp.Value).ToLocalTime().DateTime;
-                    @local.ToString("g")
-                }
-            </td>
-            <td><a href="@item.ChartUrl">See more details</a></td>
+    <tbody id="alerts" data-bind="foreach: alerts, visible: alerts().length > 0">
+        <tr class="alert" data-bind="attr: { class: cssClass}">
+            <td class="name" data-bind="text: name"></td>
+            <td class="level" data-bind="text: level"></td>
+            <td class="comments" data-bind="text: comments"></td>
+            <td class="timestamp" data-bind="text: timestamp"></td>
+            <td><a data-bind="attr: { href: chartUrl }">See more details</a></td>
         </tr>
-    }
-
+    </tbody>
 </table>
 
 <footer>

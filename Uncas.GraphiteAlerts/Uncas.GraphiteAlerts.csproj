@@ -127,6 +127,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AlertController.cs" />
+    <Compile Include="Models\ViewModels\AlertDto.cs" />
+    <Compile Include="Models\AlertService.cs" />
     <Compile Include="Models\AlertResult.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertEngine.cs" />
@@ -214,6 +217,10 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\app\alerts.bindings.js" />
+    <Content Include="Scripts\app\alerts.datacontext.js" />
+    <Content Include="Scripts\app\alerts.model.js" />
+    <Content Include="Scripts\app\alerts.viewmodel.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
