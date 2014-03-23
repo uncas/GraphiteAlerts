@@ -10,7 +10,7 @@ window.alertsApp.datacontext = (function () {
 
     function updateInfo() {
         var today = new Date();
-        $("footer p span#lastUpdated").text("Last updated " + today.toLocaleString());
+        $("footer p span#lastUpdated").text("Last updated " + today.toLocaleString() + ".");
     }
 
     function getAlerts(alertsObservable, errorObservable) {

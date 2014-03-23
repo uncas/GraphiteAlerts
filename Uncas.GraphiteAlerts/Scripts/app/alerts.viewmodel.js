@@ -3,16 +3,21 @@
     var alerts = ko.observableArray();
     var error = ko.observable();
 
-    var search = function() {
+    var search = function () {
         datacontext.getAlerts(alerts, error);
-        setTimeout(search, 30 * 1000);
     };
 
-    search();
+    var searchRepeatedly = function () {
+        search();
+        setTimeout(searchRepeatedly, 30 * 1000);
+    };
+
+    searchRepeatedly();
 
     return {
         alerts: alerts,
-        error: error
+        error: error,
+        search: search
     };
 
 })(ko, alertsApp.datacontext);
