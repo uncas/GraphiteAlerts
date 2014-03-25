@@ -9,7 +9,7 @@
 
     var searchRepeatedly = function () {
         search();
-        setTimeout(searchRepeatedly, 30 * 1000);
+        setTimeout(searchRepeatedly, 60 * 1000);
     };
 
     searchRepeatedly();

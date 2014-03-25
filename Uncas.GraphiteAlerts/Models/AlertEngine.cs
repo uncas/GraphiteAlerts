@@ -34,7 +34,7 @@ namespace Uncas.GraphiteAlerts.Models
 
             return new AlertResult(
                 AlertLevel.Ok, newestValue, newest.Timestamp,
-                string.Format("The actual value '{0:N0}' is OK.", newestValue));
+                string.Format("The actual value '{0:G4}' is OK.", newestValue));
         }
 
         private string GetComment(AlertRule rule, double newestValue)
@@ -49,10 +49,10 @@ namespace Uncas.GraphiteAlerts.Models
             {
                 case ">":
                     return
-                        "The actual value '{1:N0}' is larger than the limit at '{0:N0}'.";
+                        "The actual value '{1:G4}' is larger than the limit at '{0:G4}'.";
                 case "<":
                     return
-                        "The actual value '{1:N0}' is smaller than the limit at '{0:N0}'.";
+                        "The actual value '{1:G4}' is smaller than the limit at '{0:G4}'.";
             }
 
             return string.Empty;

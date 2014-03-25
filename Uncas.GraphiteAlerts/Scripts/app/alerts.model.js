@@ -19,6 +19,10 @@
         self.chartUrl = data.ChartUrl;
         self.timestamp = data.Timestamp;
         self.cssClass = getCssClass(data.Level);
+        self.dashboardUrl = data.DashboardUrl;
+        self.dashboardText = "";
+        if (self.dashboardUrl)
+            self.dashboardText = "Dashboard";
 
         self.toJson = function() { return ko.toJSON(self); };
     }

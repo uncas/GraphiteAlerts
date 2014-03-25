@@ -7,5 +7,6 @@
         public string Comments { get; set; }
         public string ChartUrl { get; set; }
         public string Timestamp { get; set; }
+        public string DashboardUrl { get; set; }
     }
 }

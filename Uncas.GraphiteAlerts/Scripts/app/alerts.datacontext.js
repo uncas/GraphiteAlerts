@@ -32,13 +32,14 @@ window.alertsApp.datacontext = (function() {
     }
 
     function getAlerts(alertsObservable, errorObservable) {
+        updateFromCache();
         toggleUpdate(false);
         return ajaxRequest("get", alertsUrl())
             .done(getSucceeded)
             .fail(getFailed);
 
         function updateData(data) {
-            var mappedAlerts = $.map(data, function(list) { return new createAlert(list); });
+            var mappedAlerts = $.map(data, function (list) { return new createAlert(list); });
             alertsObservable(mappedAlerts);
         }
 
@@ -50,11 +51,15 @@ window.alertsApp.datacontext = (function() {
             toggleUpdate(true);
         }
 
-        function getFailed() {
-            errorObservable("Error retrieving alerts.");
+        function updateFromCache() {
             var retrievedObject = localStorage.getItem('alerts');
             var alerts = JSON.parse(retrievedObject);
             if (alerts) updateData(alerts);
+        }
+
+        function getFailed() {
+            errorObservable("Error retrieving alerts.");
+            updateFromCache();
             updateInfo();
             updateStatus("Error while updating!");
             toggleUpdate(true);

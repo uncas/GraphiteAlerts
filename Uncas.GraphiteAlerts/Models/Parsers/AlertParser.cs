@@ -10,8 +10,17 @@ namespace Uncas.GraphiteAlerts.Models.Parsers
         {
             var alerts = JsonConvert.DeserializeObject<AlertsJson>(jsonString);
             return alerts.Alerts.Select(x =>
-                new Alert(alerts.Server, x.Target, x.Rules,
-                    string.Concat(alerts.NamePrefix, x.Name)));
+                GetAlert(alerts, x));
+        }
+
+        private static Alert GetAlert(AlertsJson alerts, AlertJson alert)
+        {
+            return new Alert(
+                alerts.Server,
+                alert.Target,
+                alert.Rules,
+                string.Concat(alerts.NamePrefix, alert.Name),
+                alert.DashboardUrl);
         }
     }
 }

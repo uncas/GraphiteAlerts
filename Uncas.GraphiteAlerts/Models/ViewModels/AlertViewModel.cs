@@ -9,10 +9,12 @@ namespace Uncas.GraphiteAlerts.Models.ViewModels
             AlertLevel level,
             string comments,
             string chartUrl,
-            DateTime? timestamp)
+            DateTime? timestamp,
+            string dashboardUrl)
         {
             ChartUrl = chartUrl;
             Timestamp = timestamp;
+            DashboardUrl = dashboardUrl;
             Comments = comments;
             Level = level;
             Name = name;
@@ -23,5 +25,6 @@ namespace Uncas.GraphiteAlerts.Models.ViewModels
         public string Comments { get; private set; }
         public string ChartUrl { get; private set; }
         public DateTime? Timestamp { get; private set; }
+        public string DashboardUrl { get; private set; }
     }
 }

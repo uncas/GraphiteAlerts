@@ -20,7 +20,8 @@ namespace Uncas.GraphiteAlerts.Controllers
                 Comments = x.Comments,
                 Level = x.Level.ToString(),
                 Name = x.Name,
-                Timestamp = GetTimestampString(x.Timestamp)
+                Timestamp = GetTimestampString(x.Timestamp),
+                DashboardUrl = x.DashboardUrl
             });
         }
 

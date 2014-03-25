@@ -40,7 +40,8 @@ namespace Uncas.GraphiteAlerts.Models
                         alertResult.Comment,
                         string.Format("{0}/render?target={1}&width=600&height=400",
                             alert.Server, alert.Target),
-                        alertResult.Timestamp);
+                        alertResult.Timestamp,
+                        alert.DashboardUrl);
                 }
             }
         }
@@ -63,10 +64,11 @@ namespace Uncas.GraphiteAlerts.Models
         {
             return new[]
             {
-                new AlertViewModel("Stuff", AlertLevel.Ok, "", "X", DateTime.Now),
+                new AlertViewModel("Stuff", AlertLevel.Ok, "", "X", DateTime.Now,
+                    "http://www.google.dk"),
                 new AlertViewModel("Blib", AlertLevel.Critical,
                     FormatComments(3, _random.Next(10, 100)), "X",
-                    DateTime.Now)
+                    DateTime.Now, "http://www.google.dk")
             };
         }
 
