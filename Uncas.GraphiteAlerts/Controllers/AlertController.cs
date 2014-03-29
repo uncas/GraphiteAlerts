@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
@@ -14,27 +13,10 @@ namespace Uncas.GraphiteAlerts.Controllers
         public IEnumerable<AlertDto> GetAlerts()
         {
             bool fake = HttpContext.Current.Request.UrlReferrer.Query.Contains("fake");
-            return new AlertService().GetAlerts(fake).Select(x => new AlertDto
-            {
-                ChartUrl = x.ChartUrl,
-                Comments = x.Comments,
-                Level = x.Level.ToString(),
-                Name = x.Name,
-                Timestamp = GetTimestampString(x.Timestamp),
-                DashboardUrl = x.DashboardUrl
-            });
-        }
-
-        private string GetTimestampString(DateTime? timestamp)
-        {
-            if (timestamp.HasValue)
-            {
-                DateTime local =
-                    new DateTimeOffset(timestamp.Value).ToLocalTime().DateTime;
-                return local.ToString("g");
-            }
-
-            return string.Empty;
+            return new AlertService().GetAlerts(fake)
+                .Select(x =>
+                    new AlertDto(x.Name, x.Level, x.Comments, x.ChartUrl, x.Timestamp,
+                        x.DashboardUrl));
         }
     }
 }
