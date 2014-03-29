@@ -12,16 +12,16 @@ namespace Uncas.GraphiteAlerts.Models
 {
     public class AlertService
     {
-        private static readonly Random _random = new Random();
+        private static readonly Random Random = new Random();
         private readonly AlertEngine _alertEngine = new AlertEngine(new GraphiteLookup());
 
-        public IEnumerable<AlertViewModel> GetAlerts(bool fake = false)
+        public IEnumerable<AlertDto> GetAlerts(bool fake = false)
         {
-            IEnumerable<AlertViewModel> alerts = fake ? GetFakeAlerts() : GetRealAlerts();
+            IEnumerable<AlertDto> alerts = fake ? GetFakeAlerts() : GetRealAlerts();
             return alerts.OrderByDescending(x => x.Level).ThenBy(x => x.Name);
         }
 
-        private IEnumerable<AlertViewModel> GetRealAlerts()
+        private IEnumerable<AlertDto> GetRealAlerts()
         {
             string folder = GetFolder();
             if (string.IsNullOrWhiteSpace(folder))
@@ -35,7 +35,7 @@ namespace Uncas.GraphiteAlerts.Models
                 foreach (Alert alert in alerts)
                 {
                     AlertResult alertResult = _alertEngine.Evaluate(alert);
-                    yield return new AlertViewModel(
+                    yield return new AlertDto(
                         alert.Name,
                         alertResult.Level,
                         alertResult.Comment,
@@ -61,14 +61,14 @@ namespace Uncas.GraphiteAlerts.Models
             return Path.Combine(physicalApplicationPath, "App_Data");
         }
 
-        private static IEnumerable<AlertViewModel> GetFakeAlerts()
+        private static IEnumerable<AlertDto> GetFakeAlerts()
         {
             return new[]
             {
-                new AlertViewModel("Stuff", AlertLevel.Ok, "", "X", DateTime.Now,
+                new AlertDto("Stuff", AlertLevel.Ok, "", "X", DateTime.Now,
                     "http://www.google.dk"),
-                new AlertViewModel("Blib", AlertLevel.Critical,
-                    FormatComments(3, _random.Next(10, 100)), "X",
+                new AlertDto("Blib", AlertLevel.Critical,
+                    FormatComments(3, Random.Next(10, 100)), "X",
                     DateTime.Now, "http://www.google.dk")
             };
         }

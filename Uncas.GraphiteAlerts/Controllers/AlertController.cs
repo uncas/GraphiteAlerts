@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
 using Uncas.GraphiteAlerts.Models;
@@ -13,10 +12,7 @@ namespace Uncas.GraphiteAlerts.Controllers
         public IEnumerable<AlertDto> GetAlerts()
         {
             bool fake = HttpContext.Current.Request.UrlReferrer.Query.Contains("fake");
-            return new AlertService().GetAlerts(fake)
-                .Select(x =>
-                    new AlertDto(x.Name, x.Level, x.Comments, x.ChartUrl, x.Timestamp,
-                        x.DashboardUrl));
+            return new AlertService().GetAlerts(fake);
         }
     }
 }

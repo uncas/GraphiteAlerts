@@ -128,7 +128,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AlertController.cs" />
-    <Compile Include="Models\ViewModels\AlertDto.cs" />
+    <Compile Include="Models\Dtos\AlertDto.cs" />
     <Compile Include="Models\AlertService.cs" />
     <Compile Include="Models\AlertResult.cs" />
     <Compile Include="Models\Alert.cs" />
@@ -140,7 +140,6 @@
     <Compile Include="Models\Parsers\AlertParser.cs" />
     <Compile Include="Models\AlertRule.cs" />
     <Compile Include="Models\Parsers\AlertsJson.cs" />
-    <Compile Include="Models\ViewModels\AlertViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Models\Graphite\DataPoint.cs" />
     <Compile Include="Models\Graphite\DataPointParser.cs" />
