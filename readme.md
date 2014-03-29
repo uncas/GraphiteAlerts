@@ -14,6 +14,6 @@ Ideas
 -----
 - Collapse on name parts.
 - Server side caching?
+- Only refresh alerts when they're expected to change (use history!). Still with possibility to force refresh of all.
 - Refresh alerts individually, using ajax refresh.
-- Floating judgement of alerts:
--- Instead of Ok vs Warning vs Critical, indicate a critical limit, and a factor for warnings?
+- Floating judgement of alerts: Instead of Ok vs Warning vs Critical, indicate a critical limit, and a factor for warnings.

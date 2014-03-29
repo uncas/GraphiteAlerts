@@ -134,16 +134,16 @@
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertEngine.cs" />
     <Compile Include="Models\AlertLevel.cs" />
-    <Compile Include="Models\AlertLookup.cs" />
-    <Compile Include="Models\IAlertLookup.cs" />
+    <Compile Include="Models\Graphite\GraphiteLookup.cs" />
+    <Compile Include="Models\Graphite\IGraphiteLookup.cs" />
     <Compile Include="Models\Parsers\AlertJson.cs" />
     <Compile Include="Models\Parsers\AlertParser.cs" />
     <Compile Include="Models\AlertRule.cs" />
     <Compile Include="Models\Parsers\AlertsJson.cs" />
     <Compile Include="Models\ViewModels\AlertViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Models\DataPoint.cs" />
-    <Compile Include="Models\Parsers\StatsParser.cs" />
+    <Compile Include="Models\Graphite\DataPoint.cs" />
+    <Compile Include="Models\Graphite\DataPointParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using NUnit.Framework;
-using Uncas.GraphiteAlerts.Models;
+using Uncas.GraphiteAlerts.Models.Graphite;
 
 namespace Uncas.GraphiteAlerts.Tests
 {
     [TestFixture]
-    public class AlertLookupTests : WithFixture<AlertLookup>
+    public class AlertLookupTests : WithFixture<GraphiteLookup>
     {
         [Test]
         public void Lookup_Graphite_Datapoints()

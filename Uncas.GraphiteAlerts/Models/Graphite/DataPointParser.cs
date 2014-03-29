@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Uncas.GraphiteAlerts.Models.Parsers
+namespace Uncas.GraphiteAlerts.Models.Graphite
 {
-    public class StatsParser
+    public class DataPointParser
     {
         public IEnumerable<DataPoint> Parse(string jsonString)
         {

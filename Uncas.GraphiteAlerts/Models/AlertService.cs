@@ -4,6 +4,7 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using Uncas.GraphiteAlerts.Models.Graphite;
 using Uncas.GraphiteAlerts.Models.Parsers;
 using Uncas.GraphiteAlerts.Models.ViewModels;
 
@@ -12,7 +13,7 @@ namespace Uncas.GraphiteAlerts.Models
     public class AlertService
     {
         private static readonly Random _random = new Random();
-        private readonly AlertEngine _alertEngine = new AlertEngine(new AlertLookup());
+        private readonly AlertEngine _alertEngine = new AlertEngine(new GraphiteLookup());
 
         public IEnumerable<AlertViewModel> GetAlerts(bool fake = false)
         {

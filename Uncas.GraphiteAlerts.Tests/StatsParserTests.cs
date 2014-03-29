@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Uncas.GraphiteAlerts.Models;
-using Uncas.GraphiteAlerts.Models.Parsers;
+using Uncas.GraphiteAlerts.Models.Graphite;
 using Uncas.GraphiteAlerts.Tests.TestData;
 
 namespace Uncas.GraphiteAlerts.Tests
 {
     [TestFixture]
-    public class StatsParserTests : WithFixture<StatsParser>
+    public class StatsParserTests : WithFixture<DataPointParser>
     {
         [Test]
         public void Parse()

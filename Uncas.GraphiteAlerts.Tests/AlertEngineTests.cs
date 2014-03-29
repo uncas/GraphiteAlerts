@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Uncas.GraphiteAlerts.Models;
+using Uncas.GraphiteAlerts.Models.Graphite;
 
 namespace Uncas.GraphiteAlerts.Tests
 {
@@ -15,7 +16,7 @@ namespace Uncas.GraphiteAlerts.Tests
         [TestCase(43, AlertLevel.Critical)]
         public void Evaluate(int value, AlertLevel expected)
         {
-            Fixture.FreezeResult<IAlertLookup, IEnumerable<DataPoint>>(new[]
+            Fixture.FreezeResult<IGraphiteLookup, IEnumerable<DataPoint>>(new[]
             {new DataPoint(value, A<DateTime>())});
             Fixture.Inject(
                 (IEnumerable<AlertRule>) new[] {new AlertRule(">", 42, AlertLevel.Critical)});

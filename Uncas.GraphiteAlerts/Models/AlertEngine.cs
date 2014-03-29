@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Uncas.GraphiteAlerts.Models.Graphite;
 
 namespace Uncas.GraphiteAlerts.Models
 {
     public class AlertEngine
     {
-        private readonly IAlertLookup _alertLookup;
+        private readonly IGraphiteLookup _graphiteLookup;
 
-        public AlertEngine(IAlertLookup alertLookup)
+        public AlertEngine(IGraphiteLookup graphiteLookup)
         {
-            _alertLookup = alertLookup;
+            _graphiteLookup = graphiteLookup;
         }
 
         public AlertResult Evaluate(Alert alert)
         {
             IEnumerable<DataPoint> dataPoints =
-                _alertLookup.Lookup(alert.Server, alert.Target);
+                _graphiteLookup.Lookup(alert.Server, alert.Target);
             DataPoint newest =
                 dataPoints.Where(y => y.Value.HasValue)
                     .OrderByDescending(x => x.Timestamp)

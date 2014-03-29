@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Uncas.GraphiteAlerts.Models
+namespace Uncas.GraphiteAlerts.Models.Graphite
 {
     public class DataPoint
     {
