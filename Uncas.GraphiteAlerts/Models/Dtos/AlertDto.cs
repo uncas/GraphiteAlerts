@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Uncas.GraphiteAlerts.Models.ViewModels
+namespace Uncas.GraphiteAlerts.Models.Dtos
 {
     public class AlertDto
     {

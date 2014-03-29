@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Http;
 using Uncas.GraphiteAlerts.Models;
-using Uncas.GraphiteAlerts.Models.ViewModels;
+using Uncas.GraphiteAlerts.Models.Dtos;
 
 namespace Uncas.GraphiteAlerts.Controllers
 {

@@ -134,6 +134,7 @@
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\AlertEngine.cs" />
     <Compile Include="Models\AlertLevel.cs" />
+    <Compile Include="Models\Graphite\FakeGraphiteLookup.cs" />
     <Compile Include="Models\Graphite\GraphiteLookup.cs" />
     <Compile Include="Models\Graphite\IGraphiteLookup.cs" />
     <Compile Include="Models\Parsers\AlertJson.cs" />

@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
+using Uncas.GraphiteAlerts.Models.Dtos;
 using Uncas.GraphiteAlerts.Models.Graphite;
 using Uncas.GraphiteAlerts.Models.Parsers;
-using Uncas.GraphiteAlerts.Models.ViewModels;
 
 namespace Uncas.GraphiteAlerts.Models
 {
     public class AlertService
     {
-        private static readonly Random Random = new Random();
-        private readonly AlertEngine _alertEngine = new AlertEngine(new GraphiteLookup());
+        private AlertEngine _alertEngine;
 
         public IEnumerable<AlertDto> GetAlerts(bool fake = false)
         {
-            IEnumerable<AlertDto> alerts = fake ? GetFakeAlerts() : GetRealAlerts();
+            IGraphiteLookup lookup = fake
+                ? new FakeGraphiteLookup()
+                : (IGraphiteLookup) new GraphiteLookup();
+            _alertEngine = new AlertEngine(lookup);
+
+            IEnumerable<AlertDto> alerts = GetRealAlerts();
             return alerts.OrderByDescending(x => x.Level).ThenBy(x => x.Name);
         }
 
@@ -59,26 +62,6 @@ namespace Uncas.GraphiteAlerts.Models
                 return null;
 
             return Path.Combine(physicalApplicationPath, "App_Data");
-        }
-
-        private static IEnumerable<AlertDto> GetFakeAlerts()
-        {
-            return new[]
-            {
-                new AlertDto("Stuff", AlertLevel.Ok, "", "X", DateTime.Now,
-                    "http://www.google.dk"),
-                new AlertDto("Blib", AlertLevel.Critical,
-                    FormatComments(3, Random.Next(10, 100)), "X",
-                    DateTime.Now, "http://www.google.dk")
-            };
-        }
-
-        private static string FormatComments(double limit, double actual)
-        {
-            return string.Format(
-                "Expected to be smaller than '{0:N0}', but was '{1:N0}'.",
-                limit,
-                actual);
         }
     }
 }
