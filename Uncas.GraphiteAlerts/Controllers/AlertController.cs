@@ -10,9 +10,9 @@ namespace Uncas.GraphiteAlerts.Controllers
     {
         private readonly AlertService _alertService;
 
-        public AlertController(AlertService alertService)
+        public AlertController()
         {
-            _alertService = alertService;
+            _alertService = new AlertService();
         }
 
         // GET api/alert
