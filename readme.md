@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/e11nosa9brw5xm6w)](https://ci.appveyor.com/project/uncas/graphitealerts)
+
 Graphite Alerts
 ===============
 
