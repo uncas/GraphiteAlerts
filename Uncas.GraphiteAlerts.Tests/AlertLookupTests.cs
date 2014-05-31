@@ -6,6 +6,7 @@ using Uncas.GraphiteAlerts.Models.Graphite;
 namespace Uncas.GraphiteAlerts.Tests
 {
     [TestFixture]
+    [Explicit]
     public class AlertLookupTests : WithFixture<GraphiteLookup>
     {
         [Test]
